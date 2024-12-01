@@ -4,18 +4,18 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "test": "jest --collectCoverage",
+    "test": "vitest",
     "new": "bun scripts/new-challenge.ts",
+    "coverage": "vitest run --coverage",
     "build": "tsc"
   },
   "license": "ISC",
   "devDependencies": {
-    "@types/jest": "29.5.10",
     "@types/node": "20.10.0",
+    "@vitest/coverage-v8": "2.1.6",
     "bun": "^1.1.38",
     "dotenv": "^16.3.1",
-    "jest": "29.7.0",
-    "ts-jest": "29.1.1",
-    "typescript": "5.3.2"
+    "typescript": "5.3.2",
+    "vitest": "^2.1.6"
   }
 }

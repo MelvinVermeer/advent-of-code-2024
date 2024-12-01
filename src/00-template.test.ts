@@ -11,7 +11,7 @@ describe("00 - Template", () => {
       expect(part1(sample)).toEqual(sample);
     });
 
-    xit("Answer", () => {
+    it.skip("Answer", () => {
       expect(part1(data)).toEqual(data);
     });
   });
@@ -21,7 +21,7 @@ describe("00 - Template", () => {
       expect(part2(sample)).toEqual(sample);
     });
 
-    xit("Answer", () => {
+    it.skip("Answer", () => {
       expect(part2(data)).toEqual(data);
     });
   });

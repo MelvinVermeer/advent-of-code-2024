@@ -9,6 +9,6 @@
     "noImplicitReturns": true,
     "skipLibCheck": true,
     "strict": true,
-    "types": ["jest", "node"]
+    "types": ["vitest/globals", "node"]
   }
 }
