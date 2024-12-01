@@ -9,10 +9,14 @@ const currentDayNumbers = fs
   .map((filename) => filename.split("-")[0])
   .map((x) => Number(x));
 
-const nextDay = Math.max(...currentDayNumbers) + 1;
-const title = process.argv[process.argv.length - 1];
+const dayFromArg = parseInt(process.argv[process.argv.length - 1]);
+const day = Number.isNaN(dayFromArg)
+  ? Math.max(...currentDayNumbers) + 1
+  : dayFromArg;
+
+const title = await getName(day.toString());
 const kebabTitle = title.replace(/ /g, "-").toLowerCase();
-const newNumber = nextDay.toString().padStart(2, "0");
+const newNumber = day.toString().padStart(2, "0");
 
 fs.copyFileSync("src/data/00", `src/data/${newNumber}`);
 fs.copyFileSync(
@@ -44,7 +48,7 @@ async function loadPuzzleData() {
 
   try {
     const response = await fetch(
-      `https://adventofcode.com/2024/day/${nextDay}/input`,
+      `https://adventofcode.com/2024/day/${day}/input`,
       {
         headers: { cookie: `session=${process.env.session}` },
       }
@@ -58,6 +62,33 @@ async function loadPuzzleData() {
   } catch (error) {
     console.log(error);
   }
+}
+
+async function getName(day: string) {
+  try {
+    const response = await fetch(
+      `https://adventofcode.com/2024/day/${parseInt(day, 10)}`,
+      {
+        headers: { cookie: `session=${process.env.session}` },
+      }
+    );
+
+    if (response.ok) {
+      const text = await response.text();
+      const regex = /<h2>--- Day \d+: (.*?) ---<\/h2>/;
+      const match = text.match(regex);
+
+      if (match) {
+        console.log(match[1]);
+        return match[1];
+      }
+    } else {
+      console.log(response.status, response.statusText);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  throw new Error("Could not fetch puzzle name");
 }
 
 loadPuzzleData();
