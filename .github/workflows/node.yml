@@ -26,3 +26,16 @@ jobs:
         run: yarn build
       - name: yarn coverage
         run: yarn coverage | tail -n +7 >> $GITHUB_STEP_SUMMARY
+  results:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    name: Final Results
+    needs: [build-test]
+    steps:
+      - run: |
+          result="${{ needs.build-test.result }}"
+          if [[ $result == "success" || $result == "skipped" ]]; then
+            exit 0
+          else
+            exit 1
+          fi
