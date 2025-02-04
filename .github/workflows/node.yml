@@ -8,10 +8,18 @@ on:
 
 jobs:
   build-test:
+
+    strategy:
+      matrix:
+        version: [16, 18, 20]
+    
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.version }}
       - name: yarn install
         run: yarn install --frozen-lockfile
       - name: yarn build
