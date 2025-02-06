@@ -5,7 +5,7 @@ const data = readFileSync("src/data/00", "utf8").split("\n");
 
 describe("00 - Template", () => {
   const sample = [""];
-
+  // 2
   describe("Part 1", () => {
     it("Sample", () => {
       expect(part1(sample)).toEqual(sample);
