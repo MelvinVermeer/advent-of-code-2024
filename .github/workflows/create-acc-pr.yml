@@ -20,7 +20,7 @@ jobs:
 
       - name: Create new branch for acceptance
         run: |
-          git checkout -b acceptance
+          git checkout acceptance
           git checkout -b acceptance-update
           git cherry-pick ${{ github.event.pull_request.merge_commit_sha }}
 
