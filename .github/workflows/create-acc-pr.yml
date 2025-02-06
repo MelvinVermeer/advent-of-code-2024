@@ -41,7 +41,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Squashed commit from PR #${{ github.event.pull_request.number }}"
-          branch: acceptance-update
+          branch: ${{ github.event.pull_request.head.ref }}-acc
           base: acceptance
           title: "PR for acceptance: Squashed commit from PR #${{ github.event.pull_request.number }}"
           body: "This PR contains the squashed commit from PR #${{ github.event.pull_request.number }}."
