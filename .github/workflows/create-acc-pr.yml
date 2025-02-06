@@ -21,6 +21,7 @@ jobs:
       - name: Create new branch for acceptance
         run: |
           echo "sha ${{ github.event.pull_request.merge_commit_sha }}"
+          git rev-parse HEAD
           git fetch origin acceptance
           git checkout acceptance
           git checkout -b acceptance-update
