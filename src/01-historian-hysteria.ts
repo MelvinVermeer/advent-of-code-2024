@@ -13,7 +13,7 @@ export const part1 = (data: string[]): any => {
 
   list1.sort((a, b) => a - b);
   list2.sort((a, b) => a - b);
-
+  //
   let diffs = 0;
   for (let i = 0; i < list1.length; i++) {
     diffs += Math.abs(list1[i] - list2[i]);
