@@ -25,7 +25,7 @@ jobs:
 
       - name: Create new branch for acceptance
         run: |
-          git switch -c acceptance-update origin/acceptance
+          git switch -c ${{ github.event.pull_request.head.ref }}-acc origin/acceptance
           echo "sha: ${{ github.event.pull_request.merge_commit_sha }}"
           git rev-parse HEAD
           git cherry-pick ${{ github.event.pull_request.merge_commit_sha }}
@@ -34,7 +34,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git push origin ${{ github.event.pull_request.head.ref }}-acc --set-upstream
+          git push origin ${{ github.event.pull_request.head.ref }}-acc
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
