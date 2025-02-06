@@ -1,5 +1,5 @@
 type K = [number[], number[]];
-
+//s
 export const part1 = (data: string[]): any => {
   const parsed = data.map((x) => x.split("   ").map((y) => parseInt(y, 10)));
 
