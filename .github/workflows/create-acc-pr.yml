@@ -21,8 +21,7 @@ jobs:
       - name: Create new branch for acceptance
         run: |
           git checkout -b acceptance-update
-          git merge --squash ${{ github.event.pull_request.head.sha }}
-          git commit -m "Squashed commit from PR #${{ github.event.pull_request.number }}"
+          git cherry-pick ${{ github.event.pull_request.merge_commit_sha }}
 
       - name: Push new branch
         env:
