@@ -11,7 +11,9 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Git
         run: |
@@ -20,9 +22,7 @@ jobs:
 
       - name: Create new branch for acceptance
         run: |
-          git fetch origin acceptance
-          git checkout acceptance
-          git checkout -b acceptance-update
+          git switch -c acceptance-update acceptance
           echo "sha: ${{ github.event.pull_request.merge_commit_sha }}"
           git rev-parse HEAD
           git cherry-pick ${{ github.event.pull_request.merge_commit_sha }}
