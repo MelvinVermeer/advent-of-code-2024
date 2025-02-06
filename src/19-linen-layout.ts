@@ -1,3 +1,4 @@
+//hi
 const canMakePattern = (towels: string[], pattern: string): boolean => {
   if (pattern.length === 0) return true;
 
