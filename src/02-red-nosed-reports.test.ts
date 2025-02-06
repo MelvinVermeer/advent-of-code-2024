@@ -2,7 +2,7 @@ import { part1, part2 } from "./02-red-nosed-reports";
 import { readFileSync } from "fs";
 
 const data = readFileSync("src/data/02", "utf8").split("\n");
-
+// 88
 describe("02 - Red-Nosed Reports", () => {
   const sample = `7 6 4 2 1
 1 2 7 8 9
