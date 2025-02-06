@@ -1,20 +1,41 @@
-name: Node
+name: Create Acceptance PR
 
 on:
-  push:
-    branches: [main]
   pull_request:
-    branches: [main]
+    types: [closed]
 
 jobs:
-  build-test:
+  create-acceptance-pr:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - name: yarn install
-        run: yarn install --frozen-lockfile
-      - name: yarn build
-        run: yarn build
-      - name: yarn coverage
-        run: yarn coverage | tail -n +7 >> $GITHUB_STEP_SUMMARY
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create new branch for acceptance
+        run: |
+          git checkout -b acceptance-update
+          git merge --squash ${{ github.event.pull_request.head.sha }}
+          git commit -m "Squashed commit from PR #${{ github.event.pull_request.number }}"
+
+      - name: Push new branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push origin acceptance-update
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Squashed commit from PR #${{ github.event.pull_request.number }}"
+          branch: acceptance-update
+          base: acceptance
+          title: "PR for acceptance: Squashed commit from PR #${{ github.event.pull_request.number }}"
+          body: "This PR contains the squashed commit from PR #${{ github.event.pull_request.number }}."
