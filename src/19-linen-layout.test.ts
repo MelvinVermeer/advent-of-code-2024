@@ -2,7 +2,7 @@ import { part1, part2 } from "./19-linen-layout";
 import { readFileSync } from "fs";
 
 const data = readFileSync("src/data/19", "utf8");
-
+//
 describe("19 - Linen Layout", () => {
   const sample = `r, wr, b, g, bwu, rb, gb, br
 
