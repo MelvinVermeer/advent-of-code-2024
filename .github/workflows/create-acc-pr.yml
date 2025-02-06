@@ -22,7 +22,7 @@ jobs:
 
       - name: Create new branch for acceptance
         run: |
-          git switch -c acceptance-update acceptance
+          git switch -c acceptance-update origin/acceptance
           echo "sha: ${{ github.event.pull_request.merge_commit_sha }}"
           git rev-parse HEAD
           git cherry-pick ${{ github.event.pull_request.merge_commit_sha }}
