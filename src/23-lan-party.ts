@@ -1,3 +1,5 @@
+console.log("Hello, Advent Of Code!");
+
 export const part1 = (data: any): any => {
   const map: Record<string, Set<string>> = {};
 
