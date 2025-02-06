@@ -24,7 +24,7 @@ export const part1 = (data: string[]): any => {
 
 export const part2 = (data: string[]): any => {
   const rows = data.map((row) => row.split(" ").map((n) => parseInt(n, 10)));
-
+  //9
   const indexes = rows
     .map((row, i) => (isSafe(row) ? i : false))
     .filter((row) => row !== false);
