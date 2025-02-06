@@ -1,0 +1,20 @@
+name: Node
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: yarn install
+        run: yarn install --frozen-lockfile
+      - name: yarn build
+        run: yarn build
+      - name: yarn coverage
+        run: yarn coverage | tail -n +7 >> $GITHUB_STEP_SUMMARY
